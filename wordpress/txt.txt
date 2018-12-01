@@ -1,0 +1,1 @@
+kubectl port-forward wordpress  8080:80

@@ -1,0 +1,26 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: wordpress
+  labels:
+    name: wordpress
+spec:
+  containers:
+  - name: wordpress
+    image: wordpress:4.9-apache
+    env:
+      - name:  WORDPRESS_DB_PASSWORD
+        value: ahmed
+      - name:  WORDPRESS_DB_HOST
+        value: 127.0.0.1
+  - name: mysql
+    image: mysql:5.7
+    env:
+      - name:  MYSQL_ROOT_PASSWORD
+        value: ahmed   
+    volumeMounts:
+      - name: data
+        mountPath:  /opt/data
+  volumes:
+    - name:  data
+      emptyDir: {}

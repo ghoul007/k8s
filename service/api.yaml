@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: api
+  labels:
+    name: api
+spec:
+  containers:
+  - name: api
+    image: lucj/city:1.0

@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: citynodeport
+spec:
+  selector:
+    app: cityNodeport
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31000 

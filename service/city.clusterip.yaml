@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: city
+spec:
+  selector:
+    app: api
+  type: ClusterIP
+  ports:
+  - port: 81
+    targetPort: 80

@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: www
+  labels:
+    name: www
+spec:
+  containers:
+  - name: proxy
+    image: nginx:1.12.2
+    ports:
+      - containerPort: 8000
+    volumeMounts:
+      - name: config
+        mountPath:  "/etc/nginx/"
+  - name: api
+    image: lucj/city:1.0
+    ports:
+      - containerPort: 80
+  volumes:
+    - name:  config
+      configMap:
+        name: nginx-config

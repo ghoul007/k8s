@@ -1,0 +1,7 @@
+kubectl set image deploy/web nginx=nginx:1.13
+
+kubectl run www --image nginx:1.11.13 --replicas 3 --record=true
+
+kubectl rollout history deploy/web
+
+kubectl rollout undo deploy/web --to-revision=1

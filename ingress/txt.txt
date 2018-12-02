@@ -1,0 +1,3 @@
+ kubectl run ahmed --image=nginx:1.12.2
+ kubectl expose deployment www --port=80 --target-port=80
+ kubectl create -f Ingress/test.yaml 

@@ -1,0 +1,107 @@
+piVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: 2018-12-02T15:19:55Z
+  labels:
+    name: www
+  name: www
+  namespace: default
+  resourceVersion: "14298"
+  selfLink: /api/v1/namespaces/default/pods/www
+  uid: b8faf491-f645-11e8-9cda-ca7be03c046c
+spec:
+  containers:
+  - image: nginx:1.12.2
+    imagePullPolicy: IfNotPresent
+    name: proxy
+    ports:
+    - containerPort: 8000
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/nginx/
+      name: config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-gbhcp
+      readOnly: true
+  - image: lucj/city:1.0
+    imagePullPolicy: IfNotPresent
+    name: api
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-gbhcp
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: kube-node-2
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: nginx-config
+    name: config
+  - name: default-token-gbhcp
+    secret:
+      defaultMode: 420
+      secretName: default-token-gbhcp
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2018-12-02T15:19:55Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2018-12-02T15:20:03Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2018-12-02T15:19:55Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://db5b334755be4ca1faecfced836c5112d8b58147bf910ed4f11b49778ffdf9bc
+    image: lucj/city:1.0
+    imageID: docker-pullable://lucj/city@sha256:b2a642a0e4ee647648120a7069c952706da2039bb5bcfa33dde3494105552f4d
+    lastState: {}
+    name: api
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2018-12-02T15:20:02Z
+  - containerID: docker://a38603f9b276425c9c45fc914c5ea8f833f0f21a340e8b913487ae900518d971
+    image: nginx:1.12
+    imageID: docker-pullable://nginx@sha256:72daaf46f11cc753c4eab981cbf869919bd1fee3d2170a2adeac12400f494728
+    lastState: {}
+    name: proxy
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2018-12-02T15:20:00Z
+  hostIP: 10.192.0.4
+  phase: Running
+  podIP: 10.244.3.6
+  qosClass: BestEffort
+  startTime: 2018-12-02T15:19:55Z

@@ -1,0 +1,12 @@
+kubectl create namespace development
+kubectl delete namespace development
+
+kubectl  get po --all-namespaces
+
+
+kubectl run www --namespace development --replicas 2 --image nginx:1.12.2
+
+ kubectl config current-context
+ 
+ kubectl config set-context dind --namespace=vote
+ kubectl config set-context dind --namespace=default

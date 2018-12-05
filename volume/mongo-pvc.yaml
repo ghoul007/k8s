@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mongo3
+  labels:
+    name: mongo
+spec:
+  containers:
+  - name: mongo
+    image: mongo:3.6
+    volumeMounts:
+      - mountPath: /data/db
+        name: datadb
+  volumes:
+    - name:  datadb
+      persistentVolumeClaim:
+        claimName: claim
